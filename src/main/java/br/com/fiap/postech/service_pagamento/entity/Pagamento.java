@@ -27,4 +27,7 @@ public class Pagamento {
     @NotNull(message = "cpf não pode estar vazio")
     private String cpf;
 
+    @NotNull(message = "status não pode estar vazio")
+    private String status;
+
 }

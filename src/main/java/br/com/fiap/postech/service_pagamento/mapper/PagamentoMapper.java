@@ -20,7 +20,8 @@ public class PagamentoMapper {
                 0L,
                 pedidoRecord.pedidoId(),
                 pedidoRecord.total(),
-                pedidoRecord.clientId().cpf()
+                pedidoRecord.clientId().cpf(),
+                "PENDENTE"
         );
     }
 }

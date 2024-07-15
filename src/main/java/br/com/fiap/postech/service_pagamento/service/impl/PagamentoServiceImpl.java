@@ -22,8 +22,12 @@ public class PagamentoServiceImpl implements PagamentoService {
     }
 
     @Override
-    public void updateStatusPagamento(String idPagamento, String statusPagamento) {
-
+    public void updateStatusPagamento(String idPedido, String statusPagamento) {
+        var pagamentoOptional = pagamentoRepository.findByIdPedido(idPedido);
+        if (pagamentoOptional.isPresent()) {
+            pagamentoOptional.get().setStatus(statusPagamento);
+            pagamentoRepository.save(pagamentoOptional.get());
+        }
     }
 
     @Override
