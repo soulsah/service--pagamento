@@ -8,8 +8,8 @@ import java.util.List;
 
 public class OrderMapper {
 
-    @Value("${description}")
-    private String description;
+    @Value("${description.texto}")
+    private String descriptionTexto;
 
     @Value("${notification.url}")
     private String notificationUrl;
@@ -17,18 +17,19 @@ public class OrderMapper {
     @Value("${sponsor}")
     private String sponsor;
 
-    @Value("${title}")
-    private String title;
+    @Value("${title.texto}")
+    private String titleTexto;
 
     public OrderRecord mapFromRecord(PedidoRecord pedidoRecord) {
         return new OrderRecord(
                 new CashOutRecord(0),
-                this.description,
+                "descricao",
                 pedidoRecord.pedidoId(),
                 mapItemsFromProdutoRecord(pedidoRecord.produtosIds()),
-                this.notificationUrl + pedidoRecord.pedidoId(),
-                new SponsorRecord(this.sponsor),
-                this.title,
+                "https://webhook-test.com/df2ebef92e0eddaae7cddf22d9a5f7c5",
+//                this.notificationUrl + pedidoRecord.pedidoId(),
+                new SponsorRecord(189254301),
+                "titulo",
                 pedidoRecord.total()
         );
     }
@@ -36,13 +37,13 @@ public class OrderMapper {
     private List<ItemRecord> mapItemsFromProdutoRecord(List<ProdutoRecord> produtoRecordList) {
         List<ItemRecord> itemRecords = new ArrayList<>();
         for (ProdutoRecord item : produtoRecordList) {
-            new ItemRecord(
+            itemRecords.add(new ItemRecord(
                 item.nome(),
                 item.preco(),
                 item.quantidadeEstoque(),
                 "unit",
                 item.preco() * item.quantidadeEstoque()
-            );
+            ));
         }
         return itemRecords;
     }
