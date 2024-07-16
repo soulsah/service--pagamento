@@ -11,19 +11,19 @@ services:
     ports:
       - 5435:5432
 
-#  app:
-#    depends_on:
-#      - postgres
-#    build: .
-#    environment:
-#      - SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/pagamento
-#      - SPRING_DATASOURCE_USERNAME=postgres
-#      - SPRING_DATASOURCE_PASSWORD=admin
-#      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-#    ports:
-#      - "8084:8084"
-#    networks:
-#      - my-networks
+  app:
+    depends_on:
+      - postgres
+    build: .
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5435/pagamento
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - "8084:8084"
+    networks:
+      - my-networks
 
 networks:
   my-networks:
