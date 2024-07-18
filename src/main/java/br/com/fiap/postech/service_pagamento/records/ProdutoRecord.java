@@ -5,7 +5,7 @@ public record ProdutoRecord(
         String nome,
         String descricao,
         double preco,
-        Integer quantidadeEstoque,
+        Integer quantidade,
         String status
 ) {
 }

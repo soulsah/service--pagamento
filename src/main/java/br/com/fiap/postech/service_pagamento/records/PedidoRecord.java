@@ -4,7 +4,7 @@ import java.util.List;
 
 public record PedidoRecord(
     String pedidoId,
-    ClienteRecord clientId,
+    ClienteRecord clienteId,
     List<ProdutoRecord> produtosIds,
     double total,
     String status

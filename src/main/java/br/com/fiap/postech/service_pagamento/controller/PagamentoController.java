@@ -7,6 +7,7 @@ import br.com.fiap.postech.service_pagamento.service.PagamentoService;
 import br.com.fiap.postech.service_pagamento.service.ProducaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +24,7 @@ public class PagamentoController {
     @Autowired
     private ProducaoService producaoService;
 
-    @PostMapping("")
+    @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> createPagamento(@RequestBody PedidoRecord pedidoRecord){
         var response = mercadoPagoService.createOrder(pedidoRecord);
         pagamentoService.createPagamento(pedidoRecord);
