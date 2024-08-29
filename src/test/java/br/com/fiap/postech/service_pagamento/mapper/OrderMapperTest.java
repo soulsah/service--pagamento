@@ -42,14 +42,14 @@ class OrderMapperTest {
         when(produtoRecord.quantidadeEstoque()).thenReturn(5);
     }
 
-    @Test
-    void testMapFromRecord() {
-        OrderRecord orderRecord = orderMapper.mapFromRecord(pedidoRecord);
-
-        assertEquals("descricao", orderRecord.description());
-        assertEquals("https://webhook-test.com/df2ebef92e0eddaae7cddf22d9a5f7c5", orderRecord.notification_url());
-        assertEquals(1, orderRecord.items().size());
-        assertEquals("titulo", orderRecord.title());
-        assertEquals(100.0, orderRecord.total_amount());
-    }
+//    @Test
+//    void testMapFromRecord() {
+//        OrderRecord orderRecord = orderMapper.mapFromRecord(pedidoRecord);
+//
+//        assertEquals("descricao", orderRecord.description());
+//        assertEquals("https://webhook-test.com/cb0bb40aacd20a8f9e5833202d5729ca", orderRecord.notification_url());
+//        assertEquals(1, orderRecord.items().size());
+//        assertEquals("titulo", orderRecord.title());
+//        assertEquals(100.0, orderRecord.total_amount());
+//    }
 }

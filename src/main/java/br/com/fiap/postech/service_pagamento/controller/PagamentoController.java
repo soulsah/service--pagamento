@@ -2,6 +2,7 @@ package br.com.fiap.postech.service_pagamento.controller;
 
 import br.com.fiap.postech.service_pagamento.records.PedidoRecord;
 import br.com.fiap.postech.service_pagamento.records.WebhookRecord;
+import br.com.fiap.postech.service_pagamento.repository.PagamentoQueueProducer;
 import br.com.fiap.postech.service_pagamento.service.MercadoPagoService;
 import br.com.fiap.postech.service_pagamento.service.PagamentoService;
 import br.com.fiap.postech.service_pagamento.service.ProducaoService;
@@ -22,6 +23,9 @@ public class PagamentoController {
 
     @Autowired
     private ProducaoService producaoService;
+
+    @Autowired
+    private PagamentoQueueProducer pagamentoQueueProducer;
 
     @PostMapping("")
     public ResponseEntity<String> createPagamento(@RequestBody PedidoRecord pedidoRecord){
