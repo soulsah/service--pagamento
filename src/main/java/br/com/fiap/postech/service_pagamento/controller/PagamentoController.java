@@ -2,6 +2,7 @@ package br.com.fiap.postech.service_pagamento.controller;
 
 import br.com.fiap.postech.service_pagamento.records.PedidoRecord;
 import br.com.fiap.postech.service_pagamento.records.WebhookRecord;
+import br.com.fiap.postech.service_pagamento.repository.PagamentoQueueProducer;
 import br.com.fiap.postech.service_pagamento.service.MercadoPagoService;
 import br.com.fiap.postech.service_pagamento.service.PagamentoService;
 import br.com.fiap.postech.service_pagamento.service.ProducaoService;
@@ -24,10 +25,13 @@ public class PagamentoController {
     @Autowired
     private ProducaoService producaoService;
 
-    @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Autowired
+    private PagamentoQueueProducer pagamentoQueueProducer;
+
+    @PostMapping("")
     public ResponseEntity<String> createPagamento(@RequestBody PedidoRecord pedidoRecord){
         var response = mercadoPagoService.createOrder(pedidoRecord);
-        pagamentoService.createPagamento(pedidoRecord);
+        pagamentoService.createPagamento(pedidoRecord, response.qr_data());
 
         return ResponseEntity.ok().body(response.qr_data());
     }
@@ -38,6 +42,13 @@ public class PagamentoController {
         pagamentoService.updateStatusPagamento(pedidoId, "PAGO");
 
         return HttpStatus.OK;
+    }
+
+    @GetMapping("/{pedidoId}")
+    public ResponseEntity<String> getPagamentos(@PathVariable String pedidoId)
+    {
+        var response = pagamentoService.findPagamentoByIdPedido(pedidoId);
+        return ResponseEntity.ok().body(response);
     }
 
 }
