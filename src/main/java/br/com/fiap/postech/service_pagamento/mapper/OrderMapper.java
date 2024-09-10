@@ -40,9 +40,9 @@ public class OrderMapper {
             itemRecords.add(new ItemRecord(
                 item.nome(),
                 item.preco(),
-                item.quantidadeEstoque(),
+                item.quantidade(),
                 "unit",
-                item.preco() * item.quantidadeEstoque()
+                item.preco() * item.quantidade()
             ));
         }
         return itemRecords;
