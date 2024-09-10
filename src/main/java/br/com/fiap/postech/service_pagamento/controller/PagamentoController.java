@@ -30,7 +30,7 @@ public class PagamentoController {
     @PostMapping("")
     public ResponseEntity<String> createPagamento(@RequestBody PedidoRecord pedidoRecord){
         var response = mercadoPagoService.createOrder(pedidoRecord);
-        pagamentoService.createPagamento(pedidoRecord);
+        pagamentoService.createPagamento(pedidoRecord, response.qr_data());
 
         return ResponseEntity.ok().body(response.qr_data());
     }
@@ -41,6 +41,13 @@ public class PagamentoController {
         pagamentoService.updateStatusPagamento(pedidoId, "PAGO");
 
         return HttpStatus.OK;
+    }
+
+    @GetMapping("/{pedidoId}")
+    public ResponseEntity<String> getPagamentos(@PathVariable String pedidoId)
+    {
+        var response = pagamentoService.findPagamentoByIdPedido(pedidoId);
+        return ResponseEntity.ok().body(response);
     }
 
 }

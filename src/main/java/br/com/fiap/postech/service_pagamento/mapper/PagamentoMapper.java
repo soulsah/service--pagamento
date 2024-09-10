@@ -15,13 +15,14 @@ public class PagamentoMapper {
         );
     }
 
-    public static Pagamento mapFromRecord(PedidoRecord pedidoRecord) {
+    public static Pagamento mapFromRecord(PedidoRecord pedidoRecord, String qrData) {
         return new Pagamento(
                 0L,
                 pedidoRecord.pedidoId(),
                 pedidoRecord.total(),
                 pedidoRecord.clientId().cpf(),
-                "PENDENTE"
+                "PENDENTE",
+                qrData
         );
     }
 }

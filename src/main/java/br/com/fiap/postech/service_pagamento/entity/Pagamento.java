@@ -30,4 +30,7 @@ public class Pagamento {
     @NotNull(message = "status não pode estar vazio")
     private String status;
 
+    @NotNull(message = "qrcode não pode estar vazio")
+    private String qr_data;
+
 }

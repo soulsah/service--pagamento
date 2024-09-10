@@ -16,8 +16,8 @@ public class PagamentoServiceImpl implements PagamentoService {
     private PagamentoRepository pagamentoRepository;
 
     @Override
-    public void createPagamento(PedidoRecord pedidoRecord) {
-        Pagamento pagamento = PagamentoMapper.mapFromRecord(pedidoRecord);
+    public void createPagamento(PedidoRecord pedidoRecord, String qrData) {
+        Pagamento pagamento = PagamentoMapper.mapFromRecord(pedidoRecord, qrData);
         pagamentoRepository.save(pagamento);
     }
 
@@ -33,6 +33,18 @@ public class PagamentoServiceImpl implements PagamentoService {
     @Override
     public PagamentoRecord findPagamentoById(String idPagamento) {
         return null;
+    }
+
+    @Override
+    public String findPagamentoByIdPedido(String pedidoId) {
+        var response = pagamentoRepository.findByIdPedido(pedidoId);
+
+        if (response.isEmpty())
+        {
+            return null;
+        }
+
+        return response.get().getQr_data();
     }
 
 }
